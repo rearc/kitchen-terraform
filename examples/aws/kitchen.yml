@@ -1,0 +1,30 @@
+---
+driver:
+  name: terraform
+  root_module_directory: test/integration/aws/fixtures
+
+provisioner:
+  name: terraform
+  enforce_idempotency: true
+  multiple_converge: 2
+
+transport:
+  name: ssh
+
+verifier:
+  name: terraform
+
+platforms:
+  - name: default
+
+suites:
+  - name: aws
+    verifier:
+      debug: true
+      systems:
+        - name: aws
+          fail_fast: false
+          backend: aws
+          backend_cache: true
+          inspec_tests:
+            - tests/integration/aws

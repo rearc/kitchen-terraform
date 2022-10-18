@@ -1,0 +1,53 @@
+---
+driver:
+  name: terraform
+
+provisioner:
+  name: terraform
+
+transport:
+  name: ssh
+  username: ubuntu
+  password: ubuntu
+  port: 2222
+
+verifier:
+  name: terraform
+  debug: true
+  # groups:
+  #   - name: container
+  #     controls:
+  #       - operating_system
+  #     port: 2222
+  #     hosts_output: hostnames
+  #   - name: localhost
+  #     controls:
+  #       - state_files
+
+platforms:
+  - name: ubuntu
+    verifier:
+      debug: true
+      systems:
+        - name: local
+          backend: local
+
+          # A subset of the controls included in the extensive_suite InSpec
+          # profile will be executed
+          controls:
+            - state_file
+        - name: remote
+          backend: ssh
+          controls:
+            - operating_system
+            # - reachable_other_host
+          # The value of the Terraform output named remote_group_public_dns will
+          # be used to obtain the hostnames to target with InSpec
+          hosts_output: hostnames
+
+          user: ubuntu
+          password: ubuntu
+          # port: 2222
+
+suites:
+  - name: docker_example

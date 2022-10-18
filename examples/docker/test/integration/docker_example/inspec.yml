@@ -1,0 +1,17 @@
+---
+name: default
+title: Docker Kitchen-Terraform
+version: 0.1.1
+inputs:
+  - name: hostnames
+    type: array
+    required: true
+  - name: test_hash
+    type: hash
+    required: true
+  - name: terraform_state
+    type: string
+    required: true
+    description: >-
+      The Terraform configuration under test
+      must define the equivalently named output
