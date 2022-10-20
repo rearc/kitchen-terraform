@@ -1,30 +1,18 @@
-
 module "this" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "3.16.1"
+  for_each           = local.vpcs
+  source             = "terraform-aws-modules/vpc/aws"
+  version            = "3.16.1"
+  name               = each.value.name
+  cidr               = each.value.cidr
+  azs                = each.value.azs
+  private_subnets    = each.value.private_subnets
+  public_subnets     = coalesce(each.value.public_subnets, [])
+  enable_nat_gateway = coalesce(each.value.enable_nat_gateway, false)
+  enable_vpn_gateway = coalesce(each.value.enable_vpn_gateway, false)
+  single_nat_gateway = coalesce(each.value.single_nat_gateway, false)
+  enable_ipv6        = coalesce(each.value.enable_ipv6, false)
+  public_subnet_tags = coalesce(merge(each.value.public_subnet_tags, var.tags), tomap({}))
+  vpc_tags           = coalesce(merge(each.value.vpc_tags, var.tags), tomap({}))
+  tags               = coalesce(merge(each.value.tags, var.tags), tomap({}))
 
-  name = "jdoll-test-vpc"
-  cidr = "10.0.0.0/16"
-
-  azs             = ["us-east-1a", "us-east-1b", "us-east-1c"]
-  private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
-
-  enable_ipv6 = false
-
-  enable_nat_gateway = false
-  single_nat_gateway = true
-
-  public_subnet_tags = {
-    Name = "overridden-name-public"
-  }
-
-  tags = {
-    Name      = "jdoll-kitchen-terraform-test"
-    Terraform = "True"
-  }
-
-  vpc_tags = {
-    Name = "jdoll-test-vpc"
-  }
 }
