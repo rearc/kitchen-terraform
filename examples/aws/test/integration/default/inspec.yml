@@ -1,6 +1,6 @@
 ---
-name: AWS_VPC
-title: AWS InSpec Profile
+name: AWS_VPC_Default
+title: AWS Default InSpec Profile
 maintainer: Rearc Engineering
 copyright: Rearc LLC
 copyright_email: engineering@rearc.io

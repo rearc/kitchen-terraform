@@ -1,12 +1,11 @@
 ---
 driver:
   name: terraform
-  root_module_directory: test/integration/aws/fixtures
 
 provisioner:
   name: terraform
   enforce_idempotency: true
-  multiple_converge: 2
+  # multiple_converge: 2
 
 transport:
   name: ssh
@@ -15,16 +14,28 @@ verifier:
   name: terraform
 
 platforms:
-  - name: default
+  - name: aws
 
 suites:
-  - name: aws
+  - name: single_vpc
+    driver:
+      name: terraform
+      root_module_directory: test/integration/single_vpc/fixtures
     verifier:
-      debug: true
+      # debug: true
       systems:
         - name: aws
-          fail_fast: false
+          fail_fast: true
           backend: aws
-          backend_cache: true
-          inspec_tests:
-            - tests/integration/aws
+          backend_cache: false
+  - name: multi_vpc
+    driver:
+      name: terraform
+      root_module_directory: test/integration/multi_vpc/fixtures
+    verifier:
+      # debug: true
+      systems:
+        - name: aws
+          fail_fast: true
+          backend: aws
+          backend_cache: false

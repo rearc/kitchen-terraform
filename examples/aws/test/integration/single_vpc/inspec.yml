@@ -1,0 +1,19 @@
+---
+name: AWS_VPC_Single
+title: AWS InSpec Profile
+maintainer: Rearc Engineering
+copyright: Rearc LLC
+copyright_email: engineering@rearc.io
+license: Apache-2.0
+summary: >-
+  An integration test profile for validation of creation of
+  AWS Virtual Private Clouds
+version: 0.1.0
+inspec_version: ">= 2.2.7"
+depends:
+  - name: inspec-aws
+    url: https://github.com/inspec/inspec-aws/archive/main.tar.gz
+  - name: default
+    path: ../default
+supports:
+  - platform: aws

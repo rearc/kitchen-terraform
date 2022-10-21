@@ -19,5 +19,5 @@ docker run --rm -it \
     -e TF_VAR_secret_key="$TF_AWS_SECRET_ACCESS_KEY" \
     -e TF_VAR_token="$TF_AWS_SESSION_TOKEN" \
     -e TF_VAR_region="$AWS_REGION" \
-    kitchen-terraform:"${RELEASE}" "$1"
+    kitchen-terraform:"${RELEASE}" "$@"
     # --entrypoint /bin/bash kitchen-terraform:"${RELEASE}"

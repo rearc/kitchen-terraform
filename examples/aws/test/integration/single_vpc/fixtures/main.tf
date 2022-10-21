@@ -13,6 +13,7 @@ module "test" {
     tags = {
       Terraform = "True"
       Kitchen   = "True"
+      Workspace = terraform.workspace
     }
   }]
 }
