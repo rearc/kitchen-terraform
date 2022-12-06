@@ -15,8 +15,15 @@ All the examples assume you have built the kitchen-terraform container image wit
 
 >All examples come with a script which allows you to run the example with minimal effort. Please read the script to see which envrionment variables you need to set.
 
+>The AWS Example assumes that you are using the Rearc Engineering Playground
 
  * AWS, builds a VPC. The VPC is pretty basic and uses the [VPC module from the Terraform Registry](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest). It will build a VPC in three Availability Zones and create three subnets. It's a rather simple setup and closely matches the simple VPC example from the registry module.
+
+   This example does require two AWS users; one with the ability to make VPCs, Subnets, and NAT Gateways. And another with read only permissions to validate those resources. The `run.sh` script enables passing the credentials as environment variables.
+
+   >For passing the credentials of the user capable of creating network resources you'll need to the set `TF_AWS_ACCESS_KEY_ID`, `TF_AWS_SECRET_ACCESS_KEY`, and `TF_AWS_SESSION_TOKEN` environment variables.
+
+   >For passing the credentials of the read only user you'll need to set; `INSPEC_AWS_ACCESS_KEY_ID`, and `INSPEC_AWS_SECRET_ACCESS_KEY`.
 
  * Docker, build a docker image and instantiates it. The container is configured to serve an SSH server and allow for 'remote connections'. In order to build the container the kitchen-terraform container will need have the host's docker socket mounted inside it, this is known as docker on docker or docker in docker.
 

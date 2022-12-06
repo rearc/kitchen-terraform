@@ -21,10 +21,12 @@ control 'aws-virtual-network' do
     end
     aws_regions.region_names.each do | region |
       describe aws_vpcs( aws_region: region ) do
-        if region == aws_region
-          its('vpc_ids') { should include(vpc[:vpc_id]) }
-        else
-          its('vpc_ids') { should_not include(vpc[:vpc_id]) }
+        describe "region: #{region}" do
+          if region == aws_region
+            its('vpc_ids') { should include(vpc[:vpc_id]) }
+          else
+            its('vpc_ids') { should_not include(vpc[:vpc_id]) }
+          end
         end
       end
     end
