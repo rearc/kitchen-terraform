@@ -1,0 +1,20 @@
+---
+provisioner:
+  name: terraform
+
+verifier:
+  name: terraform
+
+platforms:
+  - name: aws
+
+suites:
+  - name: default
+    driver:
+      name: terraform
+      root_module_directory: test/integration/default/fixtures
+    verifier:
+      systems:
+        - name: aws
+          fail_fast: true
+          backend: aws

@@ -1,0 +1,39 @@
+---
+provisioner:
+  name: terraform
+
+verifier:
+  name: terraform
+  backend_cache: false
+
+platforms:
+  - name: aws
+
+suites:
+  - name: default
+    driver:
+      name: terraform
+      root_module_directory: test/integration/default/fixtures
+    verifier:
+      systems:
+        - name: aws
+          backend: aws
+          backend_cache: false
+  - name: single_vpc
+    driver:
+      name: terraform
+      root_module_directory: test/integration/single_vpc/fixtures
+    verifier:
+      systems:
+        - name: aws
+          backend: aws
+          backend_cache: false
+  - name: multi_vpc
+    driver:
+      name: terraform
+      root_module_directory: test/integration/multi_vpc/fixtures
+    verifier:
+      systems:
+        - name: aws
+          backend: aws
+          backend_cache: false
